@@ -1,67 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>Crest of Adventure</title>
+  <meta charset="UTF-8" />
+  <title>Crest Of Adventure - Login Test</title>
+
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 </head>
+<body>
+  <h1>Google Login Test</h1>
 
-<body style="margin:0; padding:0; background:#000;">
+  <button id="google-login-btn" style="padding:10px 20px; font-size:18px;">
+    Google 로그인
+  </button>
 
-    <!-- 상단 이미지 -->
-    <img src="주점.png" 
-         style="width:100%; max-height:500px; object-fit:contain; display:block; margin:0 auto;">
+  <script>
+    // -----------------------------
+    // Firebase 설정 (너 파이어베이스 콘솔에서 복붙해온 config 넣으면 됨)
+    // -----------------------------
+    const firebaseConfig = {
+      apiKey: "너_apiKey",
+      authDomain: "너_projectId.firebaseapp.com",
+      projectId: "너_projectId",
+      storageBucket: "너_projectId.appspot.com",
+      messagingSenderId: "너값",
+      appId: "너값"
+    };
 
-    <!-- 구글 로그인 버튼 -->
-    <div style="text-align:center; margin-top:30px;">
-        <button onclick="googleLogin()" 
-                style="padding:12px 20px; font-size:20px; cursor:pointer; border:none;
-                       border-radius:8px; background:#4285F4; color:#fff;">
-            구글로 로그인
-        </button>
-    </div>
+    firebase.initializeApp(firebaseConfig);
 
-    <!-- 무료 멤버십 버튼 -->
-    <div style="text-align:center; margin-top:25px;">
-        <a href="https://www.patreon.com/YOUR_PAGE" target="_blank"
-           style="display:inline-block; background:#ff424d; color:#fff;
-           padding:12px 20px; border-radius:8px; font-size:18px; font-weight:bold;
-           text-decoration:none; font-family:sans-serif;">
-            무료 멤버십 가입하기
-        </a>
-    </div>
+    const auth = firebase.auth();
+    const provider = new firebase.auth.GoogleAuthProvider();
 
-    <script type="module">
-        import { initializeApp } 
-            from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup } 
-            from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-
-        // 🔥 너 Firebase에서 그대로 복붙해서 채워넣어라
-        const firebaseConfig = {
-            apiKey: "여기에 너 값",
-            authDomain: "여기에 너 값",
-            projectId: "여기에 너 값",
-            storageBucket: "여기에 너 값",
-            messagingSenderId: "여기에 너 값",
-            appId: "여기에 너 값"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-
-        window.googleLogin = function() {
-            signInWithPopup(auth, provider)
-            .then((result) => {
-                const user = result.user;
-                alert("구글 로그인 성공: " + user.email);
-            })
-            .catch((error) => {
-                console.error(error);
-                alert("로그인 실패: " + error.message);
-            });
-        }
-    </script>
-
+    document.getElementById("google-login-btn").addEventListener("click", () => {
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          console.log("로그인 성공:", result.user);
+          alert("로그인 성공: " + result.user.email);
+        })
+        .catch((error) => {
+          console.error("로그인 실패:", error);
+          alert("로그인 실패: " + error.message);
+        });
+    });
+  </script>
 </body>
 </html>
