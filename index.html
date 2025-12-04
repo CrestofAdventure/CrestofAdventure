@@ -5,16 +5,29 @@
     <title>Crest of Adventure</title>
 </head>
 
-<body style="margin:0; padding:0;">
+<body style="margin:0; padding:0; background:#000;">
 
+    <!-- 상단 이미지 -->
     <img src="주점.png" 
-         style="width:100%; max-height:500px; object-fit:contain; display:block;">
+         style="width:100%; max-height:500px; object-fit:contain; display:block; margin:0 auto;">
 
+    <!-- 구글 로그인 버튼 -->
     <div style="text-align:center; margin-top:30px;">
         <button onclick="googleLogin()" 
-                style="padding:12px 20px; font-size:20px; cursor:pointer;">
+                style="padding:12px 20px; font-size:20px; cursor:pointer; border:none;
+                       border-radius:8px; background:#4285F4; color:#fff;">
             구글로 로그인
         </button>
+    </div>
+
+    <!-- 무료 멤버십 버튼 -->
+    <div style="text-align:center; margin-top:25px;">
+        <a href="https://www.patreon.com/YOUR_PAGE" target="_blank"
+           style="display:inline-block; background:#ff424d; color:#fff;
+           padding:12px 20px; border-radius:8px; font-size:18px; font-weight:bold;
+           text-decoration:none; font-family:sans-serif;">
+            무료 멤버십 가입하기
+        </a>
     </div>
 
     <script type="module">
@@ -23,6 +36,7 @@
         import { getAuth, GoogleAuthProvider, signInWithPopup } 
             from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
+        // 🔥 너 Firebase에서 그대로 복붙해서 채워넣어라
         const firebaseConfig = {
             apiKey: "여기에 너 값",
             authDomain: "여기에 너 값",
@@ -51,8 +65,3 @@
 
 </body>
 </html>
-<a href="https://www.patreon.com/YOUR_PAGE" target="_blank"
-   style="display:inline-block;background:#ff424d;color:#fff;
-   padding:12px 20px;border-radius:8px;font-size:16px;font-weight:bold;
-   text-decoration:none;font-family:sans-serif;">
-  무료 멤버십 가입하기
